@@ -2,11 +2,12 @@ import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
 from elbow import find_k
+import numpy as np
 
 
 
 def blob_clustering():
-    k_known = True
+    k_known = False
     K = 2
     _EXAMPLE_CENTERS = 2
 
@@ -19,10 +20,10 @@ def blob_clustering():
                 bei jedem Durchlauf zufällig generiert
     '''
     dataset = make_blobs(
-        n_samples=200,
+        n_samples=60,
         centers=_EXAMPLE_CENTERS,
         cluster_std=1.6,
-        random_state=50,
+        random_state=40,
     )
 
     '''
@@ -30,10 +31,11 @@ def blob_clustering():
     '''
     points = dataset[0]
 
+
     '''
     Anzeigen der Punkte
     '''
-    plt.scatter(dataset[0][:, 0], dataset[0][:, 1])
+    plt.scatter(points[:, 0], points[:, 1])
     plt.show()
 
     '''
@@ -41,7 +43,7 @@ def blob_clustering():
     '''
     if not k_known:
         find_k(points)
-        K = input("Bitte gebe das gewünschte k ein: ")
+        K = int(input("Bitte gebe das gewünschte k ein: "))
 
     '''
     Erstellen einer kmeans instanz
